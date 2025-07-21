@@ -146,9 +146,11 @@ export default function AiSdrDashboard() {
 
         {/* Action Buttons */}
         <div className="mt-8 flex gap-4">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-            Start New Campaign
-          </Button>
+          <Link to="/new-campaign">
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+              Start New Campaign
+            </Button>
+          </Link>
           <Button variant="outline">
             View All Prospects
           </Button>
