@@ -147,9 +147,11 @@ export default function NewCampaign() {
             <Button variant="outline">
               Save Draft
             </Button>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Continue to Campaign Setup
-            </Button>
+            <Link to="/campaign-leads">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                Continue to Campaign Setup
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
