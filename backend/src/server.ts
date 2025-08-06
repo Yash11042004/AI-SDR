@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import campaignRoutes from "./routes/campaignRoutes";
+import importRoutes from "./routes/import";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use("/api/campaigns", campaignRoutes);
+app.use("/api/import", importRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

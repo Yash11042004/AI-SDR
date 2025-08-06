@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Linkedin } from "lucide-react";
+import { ArrowLeft, Linkedin, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 type CampaignPerson = {
@@ -20,6 +20,7 @@ export default function AllProspects() {
   const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const companyFilter = searchParams.get("company");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -63,25 +64,32 @@ export default function AllProspects() {
   return (
     <DashboardLayout>
       <div className="max-w-6xl">
-        <div className="flex items-center mb-6">
-          <Link to="/">
-            <Button variant="ghost" size="sm" className="mr-4">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Dashboard
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-2xl font-semibold">
-              {companyFilter
-                ? `Prospects at ${companyFilter}`
-                : "All Prospects"}
-            </h1>
-            {!companyFilter && (
-              <p className="text-sm text-muted-foreground">
-                Showing grouped prospects by company
-              </p>
-            )}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <Link to="/">
+              <Button variant="ghost" size="sm" className="mr-4">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Dashboard
+              </Button>
+            </Link>
+            <div>
+              <h1 className="text-2xl font-semibold">
+                {companyFilter
+                  ? `Prospects at ${companyFilter}`
+                  : "All Prospects"}
+              </h1>
+              {!companyFilter && (
+                <p className="text-sm text-muted-foreground">
+                  Showing grouped prospects by company
+                </p>
+              )}
+            </div>
           </div>
+
+          <Button variant="default" onClick={() => navigate("/import")}>
+            <Upload className="w-4 h-4 mr-2" />
+            Import Data
+          </Button>
         </div>
 
         <div className="mb-6">
@@ -104,13 +112,20 @@ export default function AllProspects() {
               <CardHeader className="flex flex-row justify-between items-center">
                 <CardTitle>{company}</CardTitle>
                 {!companyFilter && (
-                  <Link
-                    to={`/prospects?company=${encodeURIComponent(company)}`}
-                  >
-                    <Button variant="outline" size="sm">
-                      View Only
-                    </Button>
-                  </Link>
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/prospects?company=${encodeURIComponent(company)}`}
+                    >
+                      <Button variant="outline" size="sm">
+                        View Only
+                      </Button>
+                    </Link>
+                    <Link to={`/email?company=${encodeURIComponent(company)}`}>
+                      <Button variant="outline" size="sm">
+                        Send Email
+                      </Button>
+                    </Link>
+                  </div>
                 )}
               </CardHeader>
               <CardContent className="space-y-4">
