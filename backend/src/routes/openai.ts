@@ -1,3 +1,4 @@
+// backend/routes/openai.ts
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -10,7 +11,7 @@ router.post("/parse", async (req, res) => {
   const { input } = req.body;
 
   try {
-    const response = await axios.post(
+    const response = await axios.post<any>(
       "https://api.openai.com/v1/chat/completions",
       {
         model: "gpt-3.5-turbo",
@@ -32,12 +33,25 @@ router.post("/parse", async (req, res) => {
       }
     );
 
-    const content = response.data.choices[0].message.content;
-    const parsed = JSON.parse(content);
+    const content = response.data?.choices?.[0]?.message?.content || "{}";
+
+    let parsed;
+    try {
+      parsed = JSON.parse(content);
+    } catch {
+      parsed = {
+        role: "",
+        department: "",
+        industry: "",
+        country: "",
+        additional: "",
+      };
+    }
+
     res.json(parsed);
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      console.error("OpenAI Axios error:", err.response?.data || err.message);
+  } catch (err: any) {
+    if (err && err.response) {
+      console.error("OpenAI API error:", err.response.data || err.message);
     } else {
       console.error("Unknown error:", err);
     }
