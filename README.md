@@ -56,11 +56,11 @@ User Input → Product Details + Phone Number
 
 ## 📦 **Tech Stack**
 
-* **LLM / Agent Framework:** OpenAI, LangChain, or similar agentic workflow frameworks
-* **Voice:** TTS + STT engines (OpenAI Realtime, Deepgram, ElevenLabs, etc.)
-* **Telephony:** Twilio / SIP / Asterisk / WebRTC
-* **Backend:** Node.js or Python (depending on your implementation)
-* **Database (Optional):** Postgres / Firebase / MongoDB
+* **LLM / Agent Framework:** OpenAI, LangChain
+* **Voice:** TTS + STT engines 
+* **Telephony:** Twilio 
+* **Backend:** Python 
+* **Database (Optional):** MongoDB
 
 ---
 
@@ -74,12 +74,6 @@ cd ai-sdr
 ```
 
 ### 2️⃣ Install Dependencies
-
-```bash
-npm install
-```
-
-or
 
 ```bash
 pip install -r requirements.txt
@@ -97,12 +91,6 @@ TWILIO_PHONE_NUMBER=+123456789
 ```
 
 ### 4️⃣ Start the Application
-
-```bash
-npm run start
-```
-
-or
 
 ```bash
 python main.py
@@ -154,18 +142,6 @@ Objections: Wants to confirm integration with HubSpot.
 * Enable verbose logs to monitor AI thinking, call flow, and debugging info.
 
 ---
-
-## 📂 **Project Structure**
-
-```
-/src
-  /agents
-  /telephony
-  /conversation
-  /utils
-.env
-README.md
-```
 
 ---
 
