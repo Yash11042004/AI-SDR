@@ -27,6 +27,7 @@ const navigation = [
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  // refactored UI Design to be better one
 
   return (
     <div className="min-h-screen flex bg-gray-50 text-gray-900">
